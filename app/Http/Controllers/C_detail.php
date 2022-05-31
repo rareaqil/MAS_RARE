@@ -173,15 +173,16 @@ class C_detail extends Controller
             "));
 
         $nama_table = "CNOP Site Delivery Success Rate";
-        
+       
+
         $data = DB::select(DB::raw(
             "  SELECT  *
             FROM cnop_delivery
-            WHERE cnop_delivery.WITEL = '$witel' AND MONTH (cnop_delivery.date_on_air) = $bulan_req AND YEAR(cnop_delivery.date_on_air) = $tahun_req 
+            WHERE cnop_delivery.WITEL = '$witel' AND MONTH (cnop_delivery.`ON Air Date`) = $bulan_req AND YEAR(cnop_delivery.`ON Air Date`) = $tahun_req 
             "
              )); 
        
-        // dd($data);
+        dd($data);
             
        return view('detail.cnop_sukses',compact('nama_table','column','data')); 
     }

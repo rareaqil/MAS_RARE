@@ -182,7 +182,7 @@ class C_detail extends Controller
             "
              )); 
        
-        dd($data);
+        // dd($data);
             
        return view('detail.cnop_sukses',compact('nama_table','column','data')); 
     }

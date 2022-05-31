@@ -218,7 +218,7 @@
                                         <th>Product_Name</th>
                                         <th>Reg_Tsel</th>
                                         <th>TTR_Finale</th>
-                                        <th>compliance</th>
+                                        <th>compliance</th> {{-- INI HARUS SAMA KAYAK BAWAH UNTUK FILTER --}}
                                         <th>severity_ne</th>
                                         <th>jml_site_akhir</th>
                                     </tr>
@@ -305,7 +305,7 @@
       //It's important that the text used here (Category) is the same for used in the header of the column to filter
       var categoryIndex = 0;
       $("#filterTable th").each(function (i) {
-        if ($($(this)).html() == "compliance") {
+        if ($($(this)).html() == "compliance") { //HARUS SAMA SEPERTI YANG ADA DI TABLE HEAD
           categoryIndex = i; return false;
         }
       });

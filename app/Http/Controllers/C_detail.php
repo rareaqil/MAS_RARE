@@ -13,12 +13,12 @@ class C_detail extends Controller
     {
         $tahun_req = (int)$request->input("tahun");
         $bulan_req = (int)$request->input("bln");
-        $kota_req = $request->input("kota");
+        $witel = $request->input("kota");
 
         $column = DB::select(DB::raw(
         "SELECT COLUMN_NAME as kolom
         FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = 'ttr_reactive' 
+        WHERE TABLE_NAME = 'ttr_reactive' AND TABLE_SCHEMA = 'masrare' /*KALO LOCAL RUN gapake  (AND TABLE_SCHEMA = 'masrare') */
         "));
 
         $nama_table = "TTR Reactive E2E WIBS";
@@ -26,7 +26,7 @@ class C_detail extends Controller
         $data = DB::select(DB::raw(
             " SELECT *  
                        FROM ttr_reactive 
-                       WHERE ttr_reactive.WITEL_TELKOM = '$kota_req' AND MONTH(STR_TO_DATE(ttr_reactive.STATUS_DATE, '%d-%m-%Y')) = $bulan_req
+                       WHERE ttr_reactive.WITEL_TELKOM = '$witel' AND MONTH(STR_TO_DATE(ttr_reactive.STATUS_DATE, '%d-%m-%Y')) = $bulan_req
                        AND YEAR(STR_TO_DATE(ttr_reactive.STATUS_DATE, '%d-%m-%Y')) = $tahun_req "));
         // dd($column_ttr_reactive);
             
@@ -37,19 +37,19 @@ class C_detail extends Controller
     {
         $tahun_req = (int)$request->input("tahun");
         $bulan_req = (int)$request->input("bln");
-        $kota_req = $request->input("kota");
+        $witel = $request->input("kota");
 
         $column = DB::select(DB::raw(
             "SELECT COLUMN_NAME as kolom
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = 'ttr_comp' 
+            WHERE TABLE_NAME = 'ttr_comp' AND TABLE_SCHEMA = 'masrare'
             "));
 
         $nama_table = "TTR Comp. FO Akses";
         $data = DB::select(DB::raw(
             " SELECT *  
                        FROM ttr_comp 
-                       WHERE ttr_comp.witel = '$kota_req' AND MONTH(ttr_comp.resolveddate) = $bulan_req
+                       WHERE ttr_comp.witel = '$witel' AND MONTH(ttr_comp.resolveddate) = $bulan_req
                        AND YEAR(ttr_comp.resolveddate) = $tahun_req "));
         // dd($ttr_comp);
             
@@ -60,12 +60,12 @@ class C_detail extends Controller
     {
         $tahun_req= (int)$request->input("tahun");
         $bulan_req= (int)$request->input("bln");
-        $kota_req= $request->input("kota");
+        $witel= $request->input("kota");
 
         $column = DB::select(DB::raw(
             "SELECT COLUMN_NAME as kolom
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = 'cnop_mmrr' 
+            WHERE TABLE_NAME = 'cnop_mmrr' AND TABLE_SCHEMA = 'masrare'
             "));
 
         $nama_table = "CNOP: Availability Access Compliance";
@@ -73,7 +73,7 @@ class C_detail extends Controller
         $data = DB::select(DB::raw(
             "  SELECT *
             FROM cnop_mmrr 
-            WHERE cnop_mmrr.Witel  = '$kota_req' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req 
+            WHERE cnop_mmrr.Witel  = '$witel' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req 
              ")); 
         // dd($cnop_mmrr);
             
@@ -85,12 +85,12 @@ class C_detail extends Controller
     {
         $tahun_req= (int)$request->input("tahun");
         $bulan_req= (int)$request->input("bln");
-        $kota_req= $request->input("kota");
+        $witel= $request->input("kota");
 
         $column = DB::select(DB::raw(
             "SELECT COLUMN_NAME as kolom
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = 'cnop_mmrr' 
+            WHERE TABLE_NAME = 'cnop_mmrr' AND TABLE_SCHEMA = 'masrare'
             "));
 
         $nama_table = "CNOP 2.0: MTTRi Access Hub: 1 – 24 Site (16 Jam) (MINOR)";
@@ -98,7 +98,7 @@ class C_detail extends Controller
         $data = DB::select(DB::raw(
             "  SELECT  *
             FROM cnop_mmrr 
-            WHERE cnop_mmrr.Witel = '$kota_req' AND cnop_mmrr.severity_ne = 'Minor' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req
+            WHERE cnop_mmrr.Witel = '$witel' AND cnop_mmrr.severity_ne = 'Minor' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req
              "
              )); 
        
@@ -111,12 +111,12 @@ class C_detail extends Controller
     {
         $tahun_req= (int)$request->input("tahun");
         $bulan_req= (int)$request->input("bln");
-        $kota_req= $request->input("kota");
+        $witel= $request->input("kota");
 
         $column = DB::select(DB::raw(
             "SELECT COLUMN_NAME as kolom
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = 'cnop_mmrr' 
+            WHERE TABLE_NAME = 'cnop_mmrr' AND TABLE_SCHEMA = 'masrare'
             "));
 
         $nama_table = "CNOP 2.0 :MTTRi Access Hub: 25 – 74 Site (8 Jam) (MAJOR)";
@@ -124,7 +124,7 @@ class C_detail extends Controller
         $data = DB::select(DB::raw(
             "  SELECT  *
             FROM cnop_mmrr 
-            WHERE cnop_mmrr.Witel = '$kota_req' AND cnop_mmrr.severity_ne = 'Major' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req
+            WHERE cnop_mmrr.Witel = '$witel' AND cnop_mmrr.severity_ne = 'Major' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req
              "
              )); 
        
@@ -137,12 +137,12 @@ class C_detail extends Controller
     {
         $tahun_req= (int)$request->input("tahun");
         $bulan_req= (int)$request->input("bln");
-        $kota_req= $request->input("kota");
+        $witel= $request->input("kota");
 
         $column = DB::select(DB::raw(
             "SELECT COLUMN_NAME as kolom
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = 'cnop_mmrr' 
+            WHERE TABLE_NAME = 'cnop_mmrr' AND TABLE_SCHEMA = 'masrare'
             "));
 
         $nama_table = "CNOP 2.0 :MTTRi Access Hub: ≥ 75 Site (4 Jam) (CRITICAL)";
@@ -150,7 +150,7 @@ class C_detail extends Controller
         $data = DB::select(DB::raw(
             "  SELECT  *
             FROM cnop_mmrr 
-            WHERE cnop_mmrr.Witel = '$kota_req' AND cnop_mmrr.severity_ne = 'Critical' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req
+            WHERE cnop_mmrr.Witel = '$witel' AND cnop_mmrr.severity_ne = 'Critical' AND MONTH (cnop_mmrr.Status_Date) = $bulan_req AND YEAR(cnop_mmrr.Status_Date) = $tahun_req
              "
              )); 
        
@@ -164,12 +164,12 @@ class C_detail extends Controller
     {
         $tahun_req= (int)$request->input("tahun");
         $bulan_req= (int)$request->input("bln");
-        $kota_req= $request->input("kota");
+        $witel= $request->input("kota");
 
         $column = DB::select(DB::raw(
             "SELECT COLUMN_NAME as kolom
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = 'cnop_delivery' 
+            WHERE TABLE_NAME = 'cnop_delivery' AND TABLE_SCHEMA = 'masrare'
             "));
 
         $nama_table = "CNOP Site Delivery Success Rate";
@@ -177,7 +177,7 @@ class C_detail extends Controller
         $data = DB::select(DB::raw(
             "  SELECT  *
             FROM cnop_delivery
-            WHERE cnop_delivery.WITEL = '$kota_req' AND MONTH (cnop_delivery.date_on_air) = $bulan_req AND YEAR(cnop_delivery.date_on_air) = $tahun_req 
+            WHERE cnop_delivery.WITEL = '$witel' AND MONTH (cnop_delivery.date_on_air) = $bulan_req AND YEAR(cnop_delivery.date_on_air) = $tahun_req 
             "
              )); 
        
@@ -190,12 +190,12 @@ class C_detail extends Controller
     {
         $tahun_req= (int)$request->input("tahun");
         $bulan_req= (int)$request->input("bln");
-        $kota_req= $request->input("kota");
+        $witel= $request->input("kota");
 
         $column = DB::select(DB::raw(
             "SELECT COLUMN_NAME as kolom
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_NAME = 'delivery_experience_wib' 
+            WHERE TABLE_NAME = 'delivery_experience_wib' AND TABLE_SCHEMA = 'masrare'
             "));
 
         $nama_table = "MTTD OLO / Delivery Experience WIB: TTD Compliance";
@@ -203,7 +203,7 @@ class C_detail extends Controller
         $data = DB::select(DB::raw(
             "  SELECT *
             FROM delivery_experience_wib
-            WHERE delivery_experience_wib.`SERVICE WITEL` LIKE CONCAT('%','$kota_req' ,'%') AND MONTH (delivery_experience_wib.END) = $bulan_req AND YEAR(delivery_experience_wib.END) = $tahun_req "
+            WHERE delivery_experience_wib.`SERVICE WITEL` LIKE CONCAT('%','$witel' ,'%') AND MONTH (delivery_experience_wib.END) = $bulan_req AND YEAR(delivery_experience_wib.END) = $tahun_req "
              )); 
        
         // dd($column);

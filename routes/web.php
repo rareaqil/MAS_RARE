@@ -16,6 +16,8 @@ use App\Http\Controllers\C_detail;
 */
 
 Route::get('/',[C_index::class,'index']);
+
+//detaail
 Route::get('/ttr_reactive',[C_detail::class,'detail_ttr_reactive']);
 Route::get('/ttr_comp',[C_detail::class,'detail_ttr_comp']);
 Route::get('/cnop_mmrr',[C_detail::class,'detail_cnop_mmrr']);
@@ -26,10 +28,3 @@ Route::get('/cnop_critical',[C_detail::class,'detail_cnop_critical']);
 
 Route::get('/cnop_sukses',[C_detail::class,'detail_cnop_sukses']);
 Route::get('/wib_olo',[C_detail::class,'detail_wib_olo']);
-
-
-
-
-Route::post('/kirim',[C_userTest::class,'kirim']);
-
-Route::get('/datauser',[C_userTest::class,'dataUser']);

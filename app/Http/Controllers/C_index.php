@@ -202,7 +202,7 @@ class C_index extends Controller
              IFNULL(SUM(CASE WHEN cnop_delivery.`SLA Status`='IN SLA' THEN 1 ELSE 0 END)/COUNT(cnop_delivery.ORDER_NIM),0.8)*100 AS REALISASI,
              DENSE_RANK()OVER (ORDER BY REALISASI DESC) REALISASI_rank
              FROM cnop_delivery
-             RIGHT JOIN list_witel ON cnop_delivery.WITEL = list_witel.NAMA_WITEL AND MONTH (cnop_delivery.date_on_air) = $bulan AND YEAR(cnop_delivery.date_on_air) = $tahun
+             RIGHT JOIN list_witel ON cnop_delivery.WITEL = list_witel.NAMA_WITEL AND MONTH (cnop_delivery.`ON Air Date`) = $bulan AND YEAR(cnop_delivery.`ON Air Date`) = $tahun
              GROUP BY list_witel.NAMA_WITEL
              ORDER BY REALISASI DESC 
              "));

@@ -139,7 +139,7 @@ class C_index extends Controller
             FROM cnop_mmrr 
             RIGHT JOIN list_witel ON cnop_mmrr.Witel = list_witel.NAMA_WITEL  AND MONTH (cnop_mmrr.Status_Date) = $bulan AND YEAR(cnop_mmrr.Status_Date) = $tahun 
             GROUP BY list_witel.NAMA_WITEL
-            ORDER BY list_witel.NAMA_WITEL ASC 
+            ORDER BY ACH_rank ASC
              "));
         // dd($minor);
 
@@ -164,7 +164,7 @@ class C_index extends Controller
             FROM cnop_mmrr 
             RIGHT JOIN list_witel ON cnop_mmrr.Witel = list_witel.NAMA_WITEL AND MONTH (cnop_mmrr.Status_Date) = $bulan AND YEAR(cnop_mmrr.Status_Date) = $tahun 
             GROUP BY list_witel.NAMA_WITEL
-            ORDER BY list_witel.NAMA_WITEL ASC 
+            ORDER BY ACH_rank ASC
              "));
         // dd($major);
 
@@ -189,7 +189,7 @@ class C_index extends Controller
             FROM cnop_mmrr 
             RIGHT JOIN list_witel ON cnop_mmrr.Witel = list_witel.NAMA_WITEL AND MONTH (cnop_mmrr.Status_Date) = $bulan AND YEAR(cnop_mmrr.Status_Date) = $tahun 
             GROUP BY list_witel.NAMA_WITEL
-            ORDER BY list_witel.NAMA_WITEL ASC 
+            ORDER BY ACH_rank ASC
              "));
         // dd($critical);
 

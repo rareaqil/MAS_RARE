@@ -44,18 +44,20 @@ class C_index extends Controller
                        RIGHT JOIN list_witel ON ttr_reactive.WITEL_TELKOM = list_witel.NAMA_WITEL AND MONTH(STR_TO_DATE(ttr_reactive.STATUS_DATE, '%d-%m-%Y')) = $bulan AND  YEAR(STR_TO_DATE(ttr_reactive.STATUS_DATE, '%d-%m-%Y')) = $tahun  /* mengaktifkan kondisi bulan dan tahun dan juga agar witel yang tidak memiliki nilai pada tabel ini tetap terlihat */
                        GROUP BY list_witel.NAMA_WITEL /* agar witel yang tidak memiliki nilai pada tabel ini tetap terlihat */
                        ORDER BY aver")); /* order berdasarkan aver */
-        
         //TTR Comp. FO Akses
         $ttr_comp = DB::select(DB::raw(
             "SELECT list_witel.NAMA_WITEL, 
-            IFNULL((COUNT(ttr_comp.ticketid)/(SUM(ttr_comp.compliance))*100),100) AS REAL_persen, /* REAL count(ticket id)/sum(compliance) x100 if null 100 */
+            IFNULL(((SUM(ttr_comp.compliance)/COUNT(ttr_comp.ticketid))*100),100) AS REAL_persen, /* REAL count(ticket id)/sum(compliance) x100 if null 100 */
+            COUNT(ttr_comp.ticketid) AS COUNT_comply, /* REAL count(ticket id)/sum(compliance) x100 if null 100 */
+            SUM(ttr_comp.compliance) AS sum_comply, /* REAL count(ticket id)/sum(compliance) x100 if null 100 */
             (SELECT TARGET FROM list_fungsi WHERE NAMA_FUNGSI = 'TTR_COMP') AS Target,  /* Target(dari tabel witel sesuai dengan nama fungsi) */
-            (IFNULL((COUNT(ttr_comp.ticketid)/(SUM(ttr_comp.compliance))*100),100))/(SELECT TARGET FROM list_fungsi WHERE NAMA_FUNGSI = 'TTR_COMP')*100 AS ACH,
+            (IFNULL(((SUM(ttr_comp.compliance)/COUNT(ttr_comp.ticketid))*100),100))/(SELECT TARGET FROM list_fungsi WHERE NAMA_FUNGSI = 'TTR_COMP')*100 AS ACH,
             DENSE_RANK()OVER (ORDER BY ACH DESC) ACH_rank
             FROM ttr_comp
             RIGHT JOIN list_witel ON ttr_comp.witel = list_witel.NAMA_WITEL AND MONTH(ttr_comp.resolveddate) = $bulan AND  YEAR(ttr_comp.resolveddate) = $tahun
             GROUP BY list_witel.NAMA_WITEL 
             ORDER BY ACH DESC "));      
+        // dd($ttr_comp);
         
         \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query    //JANGAN DIUBAH UNTUK MASALAH QUERY CNOP: Availability Access Compliance
         
